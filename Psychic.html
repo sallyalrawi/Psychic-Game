@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Psychic Game</title>
+</head>
+
+<body>
+    <!-- The heading -->
+    <h1>The Psychic Game</h1>
+    <!-- The body content -->
+    <div id="game">
+
+        <p id="directions-text">Guess what letter I'm thinking of</p>
+        <p id="wins-text">wins:</p>
+        <p id="losses-text">losses:</p>
+        <p id="guesses-left-text">Guesses left:</p>
+        <p id="your-guesses-so-far-text">Your guesses so far:</p>
+    </div>
+
+    <script type="text/javascript">
+
+        //  Array for the app choices  //
+
+        var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+ 
+        // set variables for the wines and losses and the guesses left and the user guesse.....
+
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 9;
+        var userGuesses = [];
+
+        // Create variables that hold references to the places in the HTML where we want to display things.
+
+        var directionsText = document.getElementById("directions-text");
+        var winsText = document.getElementById("wins-text");
+        var lossesText = document.getElementById("losses-text");
+        var guessesLeftText = document.getElementById("guesses-left-text");
+        var yourGuessesSoFarText = document.getElementById("your-guesses-so-far-text");
+        var computerChoices = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+    //   The function event ........
+
+        document.onkeyup = function (event) {
+
+
+
+            var userGuess = event.key.toLowerCase();
+
+
+                userGuesses.push(userGuess);
+
+
+            if (guessesLeft > 0) {
+
+                if (userGuess === computerChoices) {
+
+                    wins++;
+
+                }
+                else if (userGuess !== computerChoices) {
+
+                    losses++;
+                    guessesLeft--;
+
+                }
+
+
+                directionsText.textContent = "direction-text";
+                winsText.textContent = "wins: " + wins;
+                lossesText.textContent = "losses: " + losses;
+                yourGuessesSoFarText.textContent = "Your guesses so far: " + userGuesses.join(',');
+                guessesLeftText.textContent = "Guessesleft: " + guessesLeft;
+            }
+            else {
+                guessesLeft = 9;
+
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
